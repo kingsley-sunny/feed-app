@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Image from "../../../components/Image/Image";
-import { api } from "../../../util/func";
+import { API } from "../../../util/func";
 import "./SinglePost.css";
 
 const SinglePost = props => {
@@ -17,7 +17,7 @@ const SinglePost = props => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${api}/feed/posts/${postId}`, {
+        const response = await fetch(`${API}/feed/posts/${postId}`, {
           headers: {
             Authorization: `Bearer ${props.token}`,
           },

@@ -12,7 +12,7 @@ import LoginPage from "./pages/Auth/Login";
 import SignupPage from "./pages/Auth/Signup";
 import FeedPage from "./pages/Feed/Feed";
 import SinglePostPage from "./pages/Feed/SinglePost/SinglePost";
-import { api } from "./util/func";
+import { API } from "./util/func";
 
 const App = () => {
   const [showBackdrop, setShowBackdrop] = useState(false);
@@ -64,7 +64,7 @@ const App = () => {
   const loginHandler = (event, authData) => {
     event.preventDefault();
     setAuthLoading(true);
-    fetch(`${api}/auth/login`, {
+    fetch(`${API}/auth/login`, {
       method: "POST",
       body: JSON.stringify({
         email: authData.email,
@@ -108,7 +108,7 @@ const App = () => {
     event.preventDefault();
 
     setAuthLoading(true);
-    fetch(`${api}/auth/signup`, {
+    fetch(`${API}/auth/signup`, {
       method: "POST",
       body: JSON.stringify({
         email: authData.email.value,

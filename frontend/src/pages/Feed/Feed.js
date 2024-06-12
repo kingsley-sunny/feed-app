@@ -7,7 +7,7 @@ import Post from "../../components/Feed/Post/Post";
 import Input from "../../components/Form/Input/Input";
 import Loader from "../../components/Loader/Loader";
 import Paginator from "../../components/Paginator/Paginator";
-import { api } from "../../util/func";
+import { API } from "../../util/func";
 import "./Feed.css";
 
 const Feed = props => {
@@ -25,7 +25,7 @@ const Feed = props => {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const res = await fetch(`${api}/feed/status`, {
+        const res = await fetch(`${API}/feed/status`, {
           headers: {
             Authorization: `Bearer ${props.token}`,
           },
@@ -48,7 +48,7 @@ const Feed = props => {
     fetchStatus();
     loadPosts();
 
-    const socket = io(api);
+    const socket = io(API);
     socket.on("updated-status", user => {
       setStatus(user.status);
     });
@@ -99,7 +99,7 @@ const Feed = props => {
     }
 
     try {
-      const res = await fetch(`${api}/feed/posts?page=${page}`, {
+      const res = await fetch(`${API}/feed/posts?page=${page}`, {
         headers: {
           Authorization: `Bearer ${props.token}`,
         },
@@ -119,7 +119,7 @@ const Feed = props => {
   const statusUpdateHandler = async event => {
     event.preventDefault();
     try {
-      const res = await fetch(`${api}/feed/status`, {
+      const res = await fetch(`${API}/feed/status`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${props.token}`,
@@ -156,10 +156,10 @@ const Feed = props => {
   const finishEditHandler = async (postData, postId) => {
     setEditLoading(true);
 
-    let url = `${api}/feed/post`;
+    let url = `${API}/feed/post`;
     let method = "POST";
     if (editPost) {
-      url = `${api}/feed/post/${postId}`;
+      url = `${API}/feed/post/${postId}`;
       method = "PUT";
     }
 
@@ -194,7 +194,7 @@ const Feed = props => {
   const deletePostHandler = async postId => {
     setPostsLoading(true);
     try {
-      const res = await fetch(`${api}/feed/post/${postId}`, {
+      const res = await fetch(`${API}/feed/post/${postId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${props.token}`,
