@@ -29,6 +29,12 @@ app.use((req, res, next) => {
 app.use("/auth", authRoutes);
 app.use("/feed", feedRoutes);
 
+app.use("/health", (req, res, next) => {
+  return res
+    .status(200)
+    .json({ health: "Active", message: "This server is running", statusCode: 200 });
+});
+
 app.use((error, req, res, next) => {
   console.log(error);
   return res.status(error.statusCode || 500).json(error);
