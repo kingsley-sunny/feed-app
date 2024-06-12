@@ -53,7 +53,7 @@ exports.login = async (req, res, next) => {
   try {
     const { password, email } = req.body;
 
-    const user = await User.findOne({
+    const user = await User.scope("withPassword").findOne({
       where: { email },
       attributes: ["id", "name", "email", "password", "status"],
     });
